@@ -12,7 +12,7 @@ Site: [https://gis.mecklenburgcountync.gov/opendata-viewer](https://gis.mecklenb
 
 # Improvements & Fixes 
 - Added Disclaimer modal popup
-
+- Mobile friendly
 
 ### Clone the project
 
