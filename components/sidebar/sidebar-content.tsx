@@ -451,21 +451,35 @@ export function SidebarContent({
                               </TooltipContent>
                             </Tooltip>
                           )}
-                          {(feature.updated || feature.size || feature.source) && (
+                          {(feature.updated ||
+                            feature.size ||
+                            feature.source) && (
                             <Tooltip>
                               <TooltipTrigger>
-                                <Calendar1Icon className="w-5 h-5" />
+                                <span 
+                                  className="flex items-center justify-center w-7 h-7 bg-cyan-100 text-cyan-600 rounded-md">
+                                  <Calendar1Icon className="w-5 h-5" />
+                                </span>
                               </TooltipTrigger>
                               <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
                                 <div className="grid grid-cols-1 border-none">
                                   {feature.updated && (
-                                  <div>{"Last update : "}{feature.updated}</div>
+                                    <div>
+                                      {"Last update : "}
+                                      {feature.updated}
+                                    </div>
                                   )}
                                   {feature.size && (
-                                  <div>{"Size : "}{feature.size}</div>
+                                    <div>
+                                      {"Size : "}
+                                      {feature.size}
+                                    </div>
                                   )}
                                   {feature.source && (
-                                  <div>{"Source : "}{feature.source}</div>
+                                    <div>
+                                      {"Source : "}
+                                      {feature.source}
+                                    </div>
                                   )}
                                 </div>
                               </TooltipContent>
