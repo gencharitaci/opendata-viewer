@@ -27,6 +27,7 @@ import TileLayer from "@arcgis/core/layers/TileLayer";
 import EsriMap from "@arcgis/core/Map";
 import DOMPurify from "dompurify";
 import {
+  Calendar1Icon,
   Check,
   ChevronRight,
   Eye,
@@ -40,13 +41,19 @@ import {
   ListFilter,
   Shapes,
   Trash2,
-  Webhook
+  Webhook,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -155,7 +162,7 @@ export function SidebarContent({
           // Create custom Mecklenburg basemap
           const baseLayer =
             url.includes("VectorBasemap") ||
-              url.includes("VectorBasemapGrayscale")
+            url.includes("VectorBasemapGrayscale")
               ? new MapImageLayer({ url })
               : new TileLayer({ url });
 
@@ -267,10 +274,11 @@ export function SidebarContent({
               </PopoverTrigger>
               <PopoverContent className="p-2 space-y-2 text-sm w-auto">
                 <div
-                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${filter === "active"
-                    ? "bg-blue-100 text-blue-500"
-                    : "hover:bg-gray-100"
-                    }`}
+                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
+                    filter === "active"
+                      ? "bg-blue-100 text-blue-500"
+                      : "hover:bg-gray-100"
+                  }`}
                   onClick={() => setFilter("active")}
                 >
                   {filter === "active" ? (
@@ -281,10 +289,11 @@ export function SidebarContent({
                   <span>Only active layers</span>
                 </div>
                 <div
-                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${filter === "all"
-                    ? "bg-blue-100 text-blue-500"
-                    : "hover:bg-gray-100"
-                    }`}
+                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
+                    filter === "all"
+                      ? "bg-blue-100 text-blue-500"
+                      : "hover:bg-gray-100"
+                  }`}
                   onClick={() => setFilter("all")}
                 >
                   {filter === "all" ? (
@@ -297,7 +306,6 @@ export function SidebarContent({
               </PopoverContent>
             </Popover>
           </div>
-
 
           {/* Layers */}
           <div data-sidebar-content="Layers" className="mt-2 border-t pt-2">
@@ -313,8 +321,9 @@ export function SidebarContent({
                       key={layerId}
                       className="flex items-center justify-between p-3 rounded-lg border hover:bg-accent/50 transition-opacity duration-200 animate-fade-in"
                       style={{
-                        animationDelay: `${Object.keys(layers).indexOf(layerId) * 200
-                          }ms`,
+                        animationDelay: `${
+                          Object.keys(layers).indexOf(layerId) * 200
+                        }ms`,
                       }}
                     >
                       <div className="flex items-center gap-2">
@@ -442,10 +451,30 @@ export function SidebarContent({
                               </TooltipContent>
                             </Tooltip>
                           )}
+                          {(feature.updated || feature.size || feature.source) && (
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <Calendar1Icon className="w-5 h-5" />
+                              </TooltipTrigger>
+                              <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
+                                <div className="grid grid-cols-1 border-none">
+                                  {feature.updated && (
+                                  <div>{"Last update : "}{feature.updated}</div>
+                                  )}
+                                  {feature.size && (
+                                  <div>{"Size : "}{feature.size}</div>
+                                  )}
+                                  {feature.source && (
+                                  <div>{"Source : "}{feature.source}</div>
+                                  )}
+                                </div>
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
                         </div>
                         <Tooltip>
                           <TooltipTrigger>
-                            <Switch 
+                            <Switch
                               checked={layers[layerId]}
                               onCheckedChange={(checked) =>
                                 toggleLayer(layerId, checked)
@@ -462,7 +491,6 @@ export function SidebarContent({
                 })}
               </div>
             </ScrollArea>
-
           </div>
         </div>
       );
@@ -698,11 +726,16 @@ export function SidebarContent({
                 {/* Welcome Text Section */}
                 <div className="flex flex-col gap-2">
                   <h3 className="text-base md:text-xl max-w-2xl font-medium tracking-tight">
-                    <span className="text-gray-500">Welcome to</span> Mecklenburg County GIS
+                    <span className="text-gray-500">Welcome to</span>{" "}
+                    Mecklenburg County GIS
                     <span className="text-primary"> Open Data Viewer!</span>
                   </h3>
                   <p className="text-base md:text-lg leading-relaxed tracking-tight text-muted-foreground max-w-2xl">
-                    Mecklenburg County believes in the power of open data and open-source software to inspire creativity, ingenuity, and collaboration. Explore our diverse collection of data, tools, and resources designed to empower you—whether you&rsquo;re a curious resident, researcher, or a developer.
+                    Mecklenburg County believes in the power of open data and
+                    open-source software to inspire creativity, ingenuity, and
+                    collaboration. Explore our diverse collection of data,
+                    tools, and resources designed to empower you—whether
+                    you&rsquo;re a curious resident, researcher, or a developer.
                     <br />
                     <strong>Let&rsquo;s build something amazing!</strong>
                   </p>
@@ -720,27 +753,59 @@ export function SidebarContent({
 
                 {/* Open Data Items */}
                 <div className="flex flex-col items-start text-start w-full max-w-2xl gap-4">
-                  <Badge variant={"outline"} className="text-lg">Data</Badge>
-                  <Button variant={"ghost"} className="text-base text-sky-700 hover:text-orange-700">
-                    <Link href="https://en.wikipedia.org/wiki/Open_data" target="_blank" rel="noopener noreferrer">
+                  <Badge variant={"outline"} className="text-lg">
+                    Data
+                  </Badge>
+                  <Button
+                    variant={"ghost"}
+                    className="text-base text-sky-700 hover:text-orange-700"
+                  >
+                    <Link
+                      href="https://en.wikipedia.org/wiki/Open_data"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Open data!
                     </Link>
                   </Button>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                      { title: "Accessible", desc: "Open data is accessible to everyone." },
-                      { title: "Open", desc: "Available in open, non-proprietary formats." },
-                      { title: "Transparent", desc: "Fosters transparency in governance." },
-                      { title: "Collaborative", desc: "Encourages innovation across communities." },
-                      { title: "Modifiable", desc: "You can modify and create derivatives." },
-                      { title: "Redistributable", desc: "Allows redistribution of data." }
+                      {
+                        title: "Accessible",
+                        desc: "Open data is accessible to everyone.",
+                      },
+                      {
+                        title: "Open",
+                        desc: "Available in open, non-proprietary formats.",
+                      },
+                      {
+                        title: "Transparent",
+                        desc: "Fosters transparency in governance.",
+                      },
+                      {
+                        title: "Collaborative",
+                        desc: "Encourages innovation across communities.",
+                      },
+                      {
+                        title: "Modifiable",
+                        desc: "You can modify and create derivatives.",
+                      },
+                      {
+                        title: "Redistributable",
+                        desc: "Allows redistribution of data.",
+                      },
                     ].map((item, index) => (
-                      <div key={index} className="flex flex-row gap-4 items-start">
+                      <div
+                        key={index}
+                        className="flex flex-row gap-4 items-start"
+                      >
                         <Check className="w-5 h-5 mt-1 text-primary" />
                         <div className="flex flex-col">
                           <p className="font-medium">{item.title}</p>
-                          <p className="text-muted-foreground text-sm">{item.desc}</p>
+                          <p className="text-muted-foreground text-sm">
+                            {item.desc}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -748,8 +813,15 @@ export function SidebarContent({
                 </div>
 
                 <div className="mt-4">
-                  <Link href={"https://maps.mecknc.gov/openmapping/data.html"} target="_blank" rel="noopener noreferrer">
-                    <Button variant={"outline"} className="bg-gradient-to-r from-[#616161] via-[#6b7280] to-[#374151] text-white">
+                  <Link
+                    href={"https://maps.mecknc.gov/openmapping/data.html"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button
+                      variant={"outline"}
+                      className="bg-gradient-to-r from-[#616161] via-[#6b7280] to-[#374151] text-white"
+                    >
                       Go to Data <ChevronRight className="w-4 h-4" />
                     </Button>
                   </Link>
@@ -769,10 +841,19 @@ export function SidebarContent({
                 </div>
 
                 <div className="flex flex-col items-start text-start w-full max-w-2xl gap-4">
-                  <Badge variant={"outline"} className="text-lg">Apps</Badge>
+                  <Badge variant={"outline"} className="text-lg">
+                    Apps
+                  </Badge>
                   <h2 className="text-base md:text-lg tracking-tight">
-                    <Button variant={"ghost"} className="text-base text-sky-700 hover:text-orange-700">
-                      <Link href="https://en.wikipedia.org/wiki/Open_data" target="_blank" rel="noopener noreferrer">
+                    <Button
+                      variant={"ghost"}
+                      className="text-base text-sky-700 hover:text-orange-700"
+                    >
+                      <Link
+                        href="https://en.wikipedia.org/wiki/Open_data"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Open-source software
                       </Link>
                     </Button>
@@ -781,18 +862,41 @@ export function SidebarContent({
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                      { title: "Freedom", desc: "Run the program for any purpose." },
-                      { title: "Understanding", desc: "Study and modify the program." },
-                      { title: "Sharing", desc: "Redistribute copies to help others." },
-                      { title: "Collaboration", desc: "Share modified versions." },
-                      { title: "Transparency", desc: "Fosters trust through open code." },
-                      { title: "Adaptability", desc: "Customize to meet specific needs." }
+                      {
+                        title: "Freedom",
+                        desc: "Run the program for any purpose.",
+                      },
+                      {
+                        title: "Understanding",
+                        desc: "Study and modify the program.",
+                      },
+                      {
+                        title: "Sharing",
+                        desc: "Redistribute copies to help others.",
+                      },
+                      {
+                        title: "Collaboration",
+                        desc: "Share modified versions.",
+                      },
+                      {
+                        title: "Transparency",
+                        desc: "Fosters trust through open code.",
+                      },
+                      {
+                        title: "Adaptability",
+                        desc: "Customize to meet specific needs.",
+                      },
                     ].map((item, index) => (
-                      <div key={index} className="flex flex-row gap-4 items-start">
+                      <div
+                        key={index}
+                        className="flex flex-row gap-4 items-start"
+                      >
                         <Check className="w-5 h-5 mt-1 text-primary" />
                         <div className="flex flex-col">
                           <p className="font-medium">{item.title}</p>
-                          <p className="text-muted-foreground text-sm">{item.desc}</p>
+                          <p className="text-muted-foreground text-sm">
+                            {item.desc}
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -800,8 +904,15 @@ export function SidebarContent({
                 </div>
 
                 <div className="mt-4">
-                  <Link href={"https://maps.mecknc.gov/openmapping/apps.html"} target="_blank" rel="noopener noreferrer">
-                    <Button variant={"outline"} className="bg-gradient-to-r from-[#616161] via-[#6b7280] to-[#374151] text-white">
+                  <Link
+                    href={"https://maps.mecknc.gov/openmapping/apps.html"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button
+                      variant={"outline"}
+                      className="bg-gradient-to-r from-[#616161] via-[#6b7280] to-[#374151] text-white"
+                    >
                       Go to Apps <ChevronRight className="w-4 h-4" />
                     </Button>
                   </Link>
@@ -810,7 +921,6 @@ export function SidebarContent({
             </div>
           </div>
         </ScrollArea>
-
       );
 
     default:
