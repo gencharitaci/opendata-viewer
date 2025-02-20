@@ -87,7 +87,6 @@ export function SidebarContent({
   const [searchDataTerm, setSearchDataTerm] = useState("");
 
   const openDataUrl = process.env.NEXT_PUBLIC_MECK_OPENDATA;
-  console.log(openDataUrl);
 
   const [showAnnouncement, setShowAnnouncement] = useState(true)
 
