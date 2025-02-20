@@ -2,14 +2,24 @@
 
 import { Basemaps } from "@/components/basemaps/basemaps";
 import { BookmarksComponent } from "@/components/bookmarks/bookmarks";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { PrintComponent } from "@/components/ui/print";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -46,16 +56,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Announcement } from "../announcement/announcement";
 
 interface SidebarContentProps extends React.HTMLAttributes<HTMLDivElement> {
   activeMenu: string;
@@ -88,6 +89,9 @@ export function SidebarContent({
 
   const openDataUrl = process.env.NEXT_PUBLIC_MECK_OPENDATA;
   console.log(openDataUrl);
+
+  const [showAnnouncement, setShowAnnouncement] = useState(true)
+
 
   // Manage animated visibility of layers
   useEffect(() => {
@@ -162,7 +166,7 @@ export function SidebarContent({
           // Create custom Mecklenburg basemap
           const baseLayer =
             url.includes("VectorBasemap") ||
-            url.includes("VectorBasemapGrayscale")
+              url.includes("VectorBasemapGrayscale")
               ? new MapImageLayer({ url })
               : new TileLayer({ url });
 
@@ -274,11 +278,10 @@ export function SidebarContent({
               </PopoverTrigger>
               <PopoverContent className="p-2 space-y-2 text-sm w-auto">
                 <div
-                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
-                    filter === "active"
-                      ? "bg-blue-100 text-blue-500"
-                      : "hover:bg-gray-100"
-                  }`}
+                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${filter === "active"
+                    ? "bg-blue-100 text-blue-500"
+                    : "hover:bg-gray-100"
+                    }`}
                   onClick={() => setFilter("active")}
                 >
                   {filter === "active" ? (
@@ -289,11 +292,10 @@ export function SidebarContent({
                   <span>Only active layers</span>
                 </div>
                 <div
-                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
-                    filter === "all"
-                      ? "bg-blue-100 text-blue-500"
-                      : "hover:bg-gray-100"
-                  }`}
+                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${filter === "all"
+                    ? "bg-blue-100 text-blue-500"
+                    : "hover:bg-gray-100"
+                    }`}
                   onClick={() => setFilter("all")}
                 >
                   {filter === "all" ? (
@@ -309,6 +311,17 @@ export function SidebarContent({
 
           {/* Layers */}
           <div data-sidebar-content="Layers" className="mt-2 border-t pt-2">
+            {/* Announcement - layers */}
+            <Announcement
+              showAnnouncement={showAnnouncement}
+              onHide={() => setShowAnnouncement(false)}
+              icon={<Info className="m-px h-4 w-4 text-sky-700" />}
+              title={"Note:"}
+              description={
+                "List of Data Layers Below Available for Live Mapping"
+              }
+            />
+
             <ScrollArea className="h-[calc(100vh-148px)]">
               <div className="space-y-1 p-2 lg:p-4 gap-4 ">
                 {filteredLayers.map(([layerId]) => {
@@ -321,9 +334,8 @@ export function SidebarContent({
                       key={layerId}
                       className="flex items-center justify-between p-3 rounded-lg border hover:bg-accent/50 transition-opacity duration-200 animate-fade-in"
                       style={{
-                        animationDelay: `${
-                          Object.keys(layers).indexOf(layerId) * 200
-                        }ms`,
+                        animationDelay: `${Object.keys(layers).indexOf(layerId) * 200
+                          }ms`,
                       }}
                     >
                       <div className="flex items-center gap-2">
@@ -454,37 +466,37 @@ export function SidebarContent({
                           {(feature.updated ||
                             feature.size ||
                             feature.source) && (
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <span 
-                                  className="flex items-center justify-center w-7 h-7 bg-cyan-100 text-cyan-600 rounded-md">
-                                  <Calendar1Icon className="w-5 h-5" />
-                                </span>
-                              </TooltipTrigger>
-                              <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
-                                <div className="grid grid-cols-1 border-none">
-                                  {feature.updated && (
-                                    <div>
-                                      {"Last update : "}
-                                      {feature.updated}
-                                    </div>
-                                  )}
-                                  {feature.size && (
-                                    <div>
-                                      {"Size : "}
-                                      {feature.size}
-                                    </div>
-                                  )}
-                                  {feature.source && (
-                                    <div>
-                                      {"Source : "}
-                                      {feature.source}
-                                    </div>
-                                  )}
-                                </div>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
+                              <Tooltip>
+                                <TooltipTrigger>
+                                  <span
+                                    className="flex items-center justify-center w-7 h-7 bg-cyan-100 text-cyan-600 rounded-md">
+                                    <Calendar1Icon className="w-5 h-5" />
+                                  </span>
+                                </TooltipTrigger>
+                                <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
+                                  <div className="grid grid-cols-1 border-none">
+                                    {feature.updated && (
+                                      <div>
+                                        {"Last update : "}
+                                        {feature.updated}
+                                      </div>
+                                    )}
+                                    {feature.size && (
+                                      <div>
+                                        {"Size : "}
+                                        {feature.size}
+                                      </div>
+                                    )}
+                                    {feature.source && (
+                                      <div>
+                                        {"Source : "}
+                                        {feature.source}
+                                      </div>
+                                    )}
+                                  </div>
+                                </TooltipContent>
+                              </Tooltip>
+                            )}
                         </div>
                         <Tooltip>
                           <TooltipTrigger>
@@ -544,7 +556,18 @@ export function SidebarContent({
             )}
           </div>
 
-          <ScrollArea className="h-[calc(100vh-148px)]">
+          {/* Announcement - layers */}
+          <Announcement
+            showAnnouncement={showAnnouncement}
+            onHide={() => setShowAnnouncement(false)}
+            icon={<Info className="m-px h-4 w-4 text-sky-700" />}
+            title={"Note:"}
+            description={
+              "List of Data Layers Below Available for without Live Mapping"
+            }
+          />
+
+          <ScrollArea className="h-[calc(100vh-180px)]">
             <div className="flex flex-col text-center rounded-md p-2 lg:p-4 gap-4 items-center">
               {filteredDataItems.map((item, index) => (
                 <Card
@@ -728,7 +751,7 @@ export function SidebarContent({
 
     case "About":
       return (
-        <ScrollArea className="h-[calc(100vh-148px)] overflow-y-auto">
+        <ScrollArea className="h-[calc(100vh-105px)] overflow-y-auto">
           <div className="w-full py-4">
             <div className="container mx-auto">
               <div className="flex flex-col text-center rounded-md p-4 lg:p-6 gap-4 items-center">
