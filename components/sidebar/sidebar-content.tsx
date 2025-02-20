@@ -54,6 +54,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import AboutAppsSVG from "@/public/images/apps.svg";
+import AboutDataSVG from "@/public/images/data.svg";
 import { useEffect, useState } from "react";
 import { Announcement } from "../announcement/announcement";
 
@@ -320,7 +322,7 @@ export function SidebarContent({
               }
             />
 
-            <ScrollArea className="h-[calc(100vh-148px)]">
+            <ScrollArea className="h-[calc(100vh-168px)]">
               <div className="space-y-1 p-2 lg:p-4 gap-4 ">
                 {filteredLayers.map(([layerId]) => {
                   const feature = getFeature(layerId);
@@ -506,7 +508,7 @@ export function SidebarContent({
                             />
                           </TooltipTrigger>
                           <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
-                            Add / Remove
+                            <span className="font-semibold">Add </span>to / <span className="font-semibold">Remove </span>from Map
                           </TooltipContent>
                         </Tooltip>
                       </div>
@@ -562,7 +564,7 @@ export function SidebarContent({
             icon={<Info className="m-px h-4 w-4 text-sky-700" />}
             title={"Note:"}
             description={
-              "List of Data Layers Below Available for without Live Mapping"
+              "List of Data Layers Below Available without Live Mapping"
             }
           />
 
@@ -779,9 +781,9 @@ export function SidebarContent({
 
                 {/* Open Data Image */}
                 <div className="relative w-full max-w-md h-[220px] md:h-[300px] overflow-hidden">
-                  <Image
+                  <Image 
                     fill
-                    src={"/opendata-viewer/images/data.svg"}
+                    src={AboutDataSVG}
                     alt={"Mecklenburg County Open Data"}
                     className="object-contain p-4"
                   />
@@ -870,7 +872,7 @@ export function SidebarContent({
                 <div className="relative w-full max-w-md h-[220px] md:h-[300px] overflow-hidden">
                   <Image
                     fill
-                    src={"/opendata-viewer/images/apps.svg"}
+                    src={AboutAppsSVG}
                     alt={"Mecklenburg County Open Apps"}
                     className="object-contain p-4"
                   />

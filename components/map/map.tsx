@@ -16,6 +16,9 @@ import Home from "@arcgis/core/widgets/Home";
 import Locate from "@arcgis/core/widgets/Locate";
 import Zoom from "@arcgis/core/widgets/Zoom";
 import { useEffect, useRef, useState } from 'react';
+import { Announcement } from '../announcement/announcement';
+import { Info } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 
 type MapComponentProps = React.HTMLAttributes<HTMLDivElement>
@@ -27,6 +30,10 @@ export function MapComponent({ className, ...props }: MapComponentProps) {
     const { setView } = useMap();
     const [featureData, setFeatureData] = useState<IDataAndFeatureAPI[]>([]);
     const mapViewRef = useRef<MapView | null>(null); 
+
+    const [showAnnouncement, setShowAnnouncement] = useState(true);
+    const isMobile = useIsMobile();
+
 
     useEffect(() => {
         const fetchLayers = async () => {
@@ -255,6 +262,21 @@ export function MapComponent({ className, ...props }: MapComponentProps) {
     return (
         <div className={cn("w-full h-full relative", className)} {...props}>
             <div ref={mapDiv} className="w-full h-full" />
+
+            <div className={`absolute 
+                ${isMobile ? 'w-[90vw] bottom-6 left-12' : 'w-[30vw] bottom-6 right-2'}`}>
+                  {/* Announcement - Map overlay */}
+                  <Announcement
+                    showAnnouncement={showAnnouncement}
+                    onHide={() => setShowAnnouncement(false)}
+                    icon={<Info className="m-px h-4 w-4 text-sky-700" />}
+                    title={"Note:"}
+                    description={
+                      "Click on Map Layer Elements when “Turned On” to see available information."
+                    }
+                  />
+                </div>
+                
         </div>
     );
 } 

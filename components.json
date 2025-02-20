@@ -17,7 +17,8 @@
     "lib": "@/lib",
     "hooks": "@/hooks",
     "styles": "@/styles",
-    "contexts": "@/contexts"
+    "contexts": "@/contexts",
+    "public": "@/public"
   },
   "iconLibrary": "lucide"
 }
