@@ -12,7 +12,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -254,7 +253,7 @@ export function SidebarContent({
               {"Search :"}
             </Button>
             <Input
-              id={searchLayersPlaceholder}
+              id={"Layers-Searchbar"}
               type="text"
               className="w-full py-2 pl-20 border rounded-lg bg-white focus:outline-none focus:ring placeholder:text-sky-700 placeholder:pl-0 placeholder:text-xs placeholder:font-semibold"
               placeholder={searchLayersPlaceholder}
@@ -539,6 +538,7 @@ export function SidebarContent({
               {"Search :"}
             </Button>
             <Input
+              id={"Data-Searchbar"}
               type="text"
               className="w-full py-2 pl-20 border rounded-lg bg-white focus:outline-none focus:ring placeholder:text-sky-700 placeholder:pl-0 placeholder:text-xs placeholder:font-semibold"
               placeholder={searchDataPlaceholder}
@@ -701,24 +701,24 @@ export function SidebarContent({
                   <CardFooter className="flex justify-between items-center gap-1 p-3 mx-2 rounded-lg shadow-none">
                     {item?.updated && (
                       <>
-                        <Label className="text-xs font-medium text-amber-700">
+                        <span className="text-xs font-medium text-amber-700">
                           {item?.updated}
-                        </Label>
+                        </span>
                         <Separator orientation="vertical" />
                       </>
                     )}
                     {item?.size && (
                       <>
-                        <Label className="text-xs font-medium text-teal-700">
+                        <span className="text-xs font-medium text-teal-700">
                           {item?.size}
-                        </Label>
+                        </span>
                         <Separator orientation="vertical" />
                       </>
                     )}
                     {item?.source && (
-                      <Label className="text-xs font-medium text-sky-700">
+                      <span className="text-xs font-medium text-sky-700">
                         {item?.source}
-                      </Label>
+                      </span>
                     )}
                   </CardFooter>
                 </Card>

@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/label";
 import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/sidebar/sidebar";
 import Link from "next/link";
 import { MecklenburgGISLogo, MecklenburgLogo } from "./meck-social-media";
@@ -6,7 +5,7 @@ import { MecklenburgGISLogo, MecklenburgLogo } from "./meck-social-media";
 const MecklenburgLinks = [
     {
         title: "Mecklenburg County",
-        logo: MecklenburgLogo, 
+        logo: MecklenburgLogo,
         url: "https://mecknc.gov/",
         colorClass: "text-red-700",
     },
@@ -28,7 +27,7 @@ export function SidebarMecklenburgMenu() {
                             <Link href={item.url} target="_blank">
                                 <SidebarMenuButton className="flex items-center px-2.5 md:px-2 w-full justify-start">
                                     <item.logo />
-                                    <Label className="block sm:hidden ml-2 text-sm">{item.title}</Label>
+                                    <span className="block sm:hidden ml-2 text-sm">{item.title}</span>
                                 </SidebarMenuButton>
                             </Link>
                         </SidebarMenuItem>
