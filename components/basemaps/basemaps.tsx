@@ -25,6 +25,14 @@ const BasemapTypes = {
 
 
 const arcgisBasemaps = [
+  // Initial Basemap
+  {
+    id: BasemapTypes.Topo,
+    name: "Topographic",
+    thumbnail: "/opendata-viewer/basemaps/topo.png",
+    preview: "Detailed terrain and natural features",
+  },
+  // Mecklenburg basemaps
   {
     id: BasemapTypes.MeckBasemap,
     name: "Meck Basemap",
@@ -61,12 +69,6 @@ const arcgisBasemaps = [
     url: "https://meckgis.mecklenburgcountync.gov/server/rest/services/Basemap/VectorBasemap/MapServer",
   },
   // Standard ArcGIS basemaps
-  {
-    id: BasemapTypes.Topo,
-    name: "Topographic",
-    thumbnail: "/opendata-viewer/basemaps/topo.png",
-    preview: "Detailed terrain and natural features",
-  },
   {
     id: BasemapTypes.Streets,
     name: "Streets",
