@@ -104,7 +104,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 >
                   <Link href="#" className="w-full h-full">
                     <Image
-                      src="/opendata-viewer/logo/mecklenburg-county-logo.png"
+                      src="/opendata-viewer/logo/mecklenburg-county-logo2.png"
                       alt="Mecklenburg County Logo"
                       width={48}
                       height={48}
