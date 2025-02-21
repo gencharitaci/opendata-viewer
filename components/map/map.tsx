@@ -264,7 +264,7 @@ export function MapComponent({ className, ...props }: MapComponentProps) {
             <div ref={mapDiv} className="w-full h-full" />
 
             <div className={`absolute 
-                ${isMobile ? 'w-[90vw] bottom-6 left-12' : 'w-[30vw] bottom-6 right-2'}`}>
+                ${isMobile ? 'w-[90vw] top-2 left-11' : 'w-[30vw] top-2 right-2'}`}>
                   {/* Announcement - Map overlay */}
                   <Announcement
                     showAnnouncement={showAnnouncement}
