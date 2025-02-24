@@ -2,6 +2,8 @@ import { MapProvider } from "@/contexts/map-context";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
+import { GoogleTagManager } from '@next/third-parties/google'
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="G-CH3SK01F8N" />
       <body className={inter.className}>
         <MapProvider>
           {children}
