@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="G-CH3SK01F8N" />
+      <GoogleTagManager gtmId="G-S5SFKCKKQW" />
       <body className={inter.className}>
         <MapProvider>
           {children}
