@@ -43,7 +43,7 @@ const Disclaimer = () => {
             onOpenChange={(open) => setIsOpen(open && !dontShowAgain)}
         >
             <DialogContent 
-                className={`bg-gradient-to-r from-sky-700/20 via-amber-500/20 to-sky-300/20 rounded-2xl opacity-75 
+                className={`bg-gradient-to-r from-sky-700/20 via-amber-500/20 to-sky-300/20 rounded-2xl opacity-85 transition-opacity duration-300 ease-in-out 
                 ${isMobile ? 'w-[80vw] px-4' : 'w-[512px]'}`}>
                 <DialogHeader>
                     <DialogTitle className="pb-2 text-orange-800">Disclaimer</DialogTitle>
