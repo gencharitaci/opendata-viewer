@@ -2,8 +2,7 @@ import { MapProvider } from "@/contexts/map-context";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import { GoogleTagManager } from '@next/third-parties/google'
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="G-S5SFKCKKQW" />
+      <GoogleAnalytics gaId="G-TJG963W5HP" />
       <body className={inter.className}>
         <MapProvider>
           {children}
@@ -28,3 +27,14 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+
+{/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJG963W5HP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TJG963W5HP');
+</script> */}
