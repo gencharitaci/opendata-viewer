@@ -20,6 +20,7 @@ import {
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LayerProvider } from "@/contexts/layer-context";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const MapComponent = dynamic(
   () => import("@/components/map/map").then((mod) => mod.MapComponent),
@@ -27,6 +28,16 @@ const MapComponent = dynamic(
 );
 
 export default function Page() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+  
   return (
     <TooltipProvider>
       <LayerProvider>
