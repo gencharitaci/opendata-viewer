@@ -90,8 +90,7 @@ export function SidebarContent({
 
   const openDataUrl = process.env.NEXT_PUBLIC_MECK_OPENDATA;
 
-  const [showAnnouncement, setShowAnnouncement] = useState(true)
-
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
 
   // Manage animated visibility of layers
   useEffect(() => {
@@ -166,7 +165,7 @@ export function SidebarContent({
           // Create custom Mecklenburg basemap
           const baseLayer =
             url.includes("VectorBasemap") ||
-              url.includes("VectorBasemapGrayscale")
+            url.includes("VectorBasemapGrayscale")
               ? new MapImageLayer({ url })
               : new TileLayer({ url });
 
@@ -278,10 +277,11 @@ export function SidebarContent({
               </PopoverTrigger>
               <PopoverContent className="p-2 space-y-2 text-sm w-auto">
                 <div
-                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${filter === "active"
-                    ? "bg-blue-100 text-blue-500"
-                    : "hover:bg-gray-100"
-                    }`}
+                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
+                    filter === "active"
+                      ? "bg-blue-100 text-blue-500"
+                      : "hover:bg-gray-100"
+                  }`}
                   onClick={() => setFilter("active")}
                 >
                   {filter === "active" ? (
@@ -292,10 +292,11 @@ export function SidebarContent({
                   <span>Only active layers</span>
                 </div>
                 <div
-                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${filter === "all"
-                    ? "bg-blue-100 text-blue-500"
-                    : "hover:bg-gray-100"
-                    }`}
+                  className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
+                    filter === "all"
+                      ? "bg-blue-100 text-blue-500"
+                      : "hover:bg-gray-100"
+                  }`}
                   onClick={() => setFilter("all")}
                 >
                   {filter === "all" ? (
@@ -334,8 +335,9 @@ export function SidebarContent({
                       key={layerId}
                       className="flex items-center justify-between p-3 rounded-lg border hover:bg-accent/50 transition-opacity duration-200 animate-fade-in"
                       style={{
-                        animationDelay: `${Object.keys(layers).indexOf(layerId) * 200
-                          }ms`,
+                        animationDelay: `${
+                          Object.keys(layers).indexOf(layerId) * 200
+                        }ms`,
                       }}
                     >
                       <div className="flex items-center gap-2">
@@ -466,51 +468,53 @@ export function SidebarContent({
                           {(feature.updated ||
                             feature.size ||
                             feature.source) && (
-                              <Tooltip>
-                                <TooltipTrigger>
-                                  <span
-                                    className="flex items-center justify-center w-7 h-7 bg-cyan-100 text-cyan-600 rounded-md">
-                                    <Calendar1Icon className="w-5 h-5" />
-                                  </span>
-                                </TooltipTrigger>
-                                <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
-                                  <div className="grid grid-cols-1 border-none">
-                                    {feature.updated && (
-                                      <div>
-                                        {"Last update : "}
-                                        {feature.updated}
-                                      </div>
-                                    )}
-                                    {feature.size && (
-                                      <div>
-                                        {"Size : "}
-                                        {feature.size}
-                                      </div>
-                                    )}
-                                    {feature.source && (
-                                      <div>
-                                        {"Source : "}
-                                        {feature.source}
-                                      </div>
-                                    )}
-                                  </div>
-                                </TooltipContent>
-                              </Tooltip>
-                            )}
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <span className="flex items-center justify-center w-7 h-7 bg-cyan-100 text-cyan-600 rounded-md">
+                                  <Calendar1Icon className="w-5 h-5" />
+                                </span>
+                              </TooltipTrigger>
+                              <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
+                                <div className="grid grid-cols-1 border-none">
+                                  {feature.updated && (
+                                    <div>
+                                      {"Last update : "}
+                                      {feature.updated}
+                                    </div>
+                                  )}
+                                  {feature.size && (
+                                    <div>
+                                      {"Size : "}
+                                      {feature.size}
+                                    </div>
+                                  )}
+                                  {feature.source && (
+                                    <div>
+                                      {"Source : "}
+                                      {feature.source}
+                                    </div>
+                                  )}
+                                </div>
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
                         </div>
-                        <Tooltip>
+
+                        <Switch
+                          checked={layers[layerId]}
+                          onCheckedChange={(checked) =>
+                            toggleLayer(layerId, checked)
+                          }
+                          id="layer-switch"
+                        />
+
+                        {/* <Tooltip>
                           <TooltipTrigger>
-                            <Switch
-                              checked={layers[layerId]}
-                              onCheckedChange={(checked) =>
-                                toggleLayer(layerId, checked)
-                              }
-                            />
                           </TooltipTrigger>
                           <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
                             <span className="font-semibold">Add </span>to / <span className="font-semibold">Remove </span>from Map
                           </TooltipContent>
-                        </Tooltip>
+                        </Tooltip> */}
                       </div>
                     </div>
                   );
@@ -781,7 +785,7 @@ export function SidebarContent({
 
                 {/* Open Data Image */}
                 <div className="relative w-full max-w-md h-[220px] md:h-[300px] overflow-hidden">
-                  <Image 
+                  <Image
                     fill
                     src={AboutDataSVG}
                     alt={"Mecklenburg County Open Data"}
