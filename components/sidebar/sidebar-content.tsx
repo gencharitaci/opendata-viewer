@@ -39,6 +39,7 @@ import {
   Calendar1Icon,
   Check,
   ChevronRight,
+  Database,
   Eye,
   EyeOff,
   FileDown,
@@ -363,6 +364,23 @@ export function SidebarContent({
                       <div className="flex items-center gap-1">
                         {/* Icon Links */}
                         <div className="flex justify-start items-center gap-1 p-1 rounded-lg shadow-none">
+                          {feature.gpkg && (
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <a
+                                  href={`${openDataUrl}/${feature.gpkg}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center justify-center w-7 h-7 bg-violet-100 text-violet-700 rounded-lg"
+                                >
+                                  <Database className="w-5 h-5" />
+                                </a>
+                              </TooltipTrigger>
+                              <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
+                                GeoPackage
+                              </TooltipContent>
+                            </Tooltip>
+                          )}
                           {feature.shapefile && (
                             <Tooltip>
                               <TooltipTrigger>
@@ -592,6 +610,23 @@ export function SidebarContent({
                         {item?.title}
                       </div>
                       <div className="flex gap-1 justify-end">
+                        {item?.gpkg && (
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <a
+                                href={`${openDataUrl}/${item?.gpkg}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center w-7 h-7 bg-blue-100 text-blue-500 rounded-lg"
+                              >
+                                <Database className="w-5 h-5" />
+                              </a>
+                            </TooltipTrigger>
+                            <TooltipContent className="w-auto h-auto text-sm text-justify rounded-lg p-2">
+                              GeoPackage
+                            </TooltipContent>
+                          </Tooltip>
+                        )}
                         {item?.shapefile && (
                           <Tooltip>
                             <TooltipTrigger>
