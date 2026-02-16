@@ -2,6 +2,7 @@ export interface IDataAndFeatureAPI {
     ags?: string;
     description?: string;
     metadata?: string;
+    gpkg?: string;
     shapefile?: string;
     byod?: string;
     theURL?: string;
